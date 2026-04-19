@@ -2,7 +2,7 @@
 
 > 6 professional AI writing tools in one place. No signup. No limits on free tier. Powered by Google Gemini.
 
-**[Try it FREE →](https://maxai-writer-pro-tools.netlify.app)**
+**[Try it FREE →](https://maxai-writer.pages.dev)**
 
 ## Tools Included
 
@@ -33,7 +33,7 @@
 
 ## Screenshots
 
-Visit [maxai-writer-pro-tools.netlify.app](https://maxai-writer-pro-tools.netlify.app) to see the tools in action.
+Visit [maxai-writer.pages.dev](https://maxai-writer.pages.dev) to see the tools in action.
 
 ## Getting Started
 
@@ -56,4 +56,4 @@ MIT License - Free for personal and commercial use.
 
 ---
 
-**[→ Try MaxAI Writer Free](https://maxai-writer-pro-tools.netlify.app)** | **[→ Buy Pro ($4.99)](https://maxai-writer-pro-tools.netlify.app/pro)**
+**[→ Try MaxAI Writer Free](https://maxai-writer.pages.dev)** | **[→ Buy Pro ($4.99)](https://maxai-writer.pages.dev/pro)**
