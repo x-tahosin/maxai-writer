@@ -94,17 +94,61 @@ export default function ShopPage() {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleActivate = () => {
+  const [verifying, setVerifying] = useState(false);
+  const [verifyError, setVerifyError] = useState("");
+
+  const handleActivate = async () => {
     if (!txHash.trim()) return;
-    if (selectedProduct === "bundle") {
-      localStorage.setItem("maxai_pro", "true");
-      localStorage.setItem("pc_pro", "true");
-      localStorage.setItem("prompt_bible", "true");
-    } else if (selectedProduct) {
-      localStorage.setItem(`${selectedProduct}_purchased`, "true");
+    setVerifying(true);
+    setVerifyError("");
+
+    try {
+      const res = await fetch("https://bsc-dataseed.binance.org/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          jsonrpc: "2.0",
+          method: "eth_getTransactionByHash",
+          params: [txHash.trim()],
+          id: 1,
+        }),
+      });
+      const data = await res.json();
+      const tx = data?.result;
+
+      if (!tx || !tx.to) {
+        setVerifyError("Transaction not found. Check your TX hash.");
+        setVerifying(false);
+        return;
+      }
+
+      if (tx.to.toLowerCase() !== BNB_WALLET.toLowerCase()) {
+        setVerifyError("Payment sent to wrong address.");
+        setVerifying(false);
+        return;
+      }
+
+      const valueBNB = parseInt(tx.value, 16) / 1e18;
+      const minBNB = selectedProduct === "bundle" ? 0.018 : 0.005;
+      if (valueBNB < minBNB) {
+        setVerifyError(`Only ${valueBNB.toFixed(4)} BNB received. Minimum: ${minBNB} BNB.`);
+        setVerifying(false);
+        return;
+      }
+
+      if (selectedProduct === "bundle") {
+        localStorage.setItem("maxai_pro", "true");
+        localStorage.setItem("pc_pro", "true");
+        localStorage.setItem("prompt_bible", "true");
+      } else if (selectedProduct) {
+        localStorage.setItem(`${selectedProduct}_purchased`, "true");
+      }
+      localStorage.setItem("tx_hash", txHash);
+      setActivated(true);
+    } catch {
+      setVerifyError("Verification failed. Try again.");
     }
-    localStorage.setItem("tx_hash", txHash);
-    setActivated(true);
+    setVerifying(false);
   };
 
   return (
@@ -305,11 +349,17 @@ export default function ShopPage() {
                 className="w-full rounded-xl border border-border bg-background px-3 py-2.5 text-sm font-mono focus:outline-none focus:border-accent/50"
               />
             </div>
+            {verifyError && (
+              <div className="rounded-xl bg-red-500/10 border border-red-500/20 px-3 py-2 text-xs text-red-400 mb-3">
+                {verifyError}
+              </div>
+            )}
             <div className="flex gap-3">
               <button
                 onClick={() => {
                   setSelectedProduct(null);
                   setTxHash("");
+                  setVerifyError("");
                 }}
                 className="flex-1 rounded-xl border border-border py-2.5 text-sm hover:bg-surface-hover transition-colors"
               >
@@ -317,10 +367,10 @@ export default function ShopPage() {
               </button>
               <button
                 onClick={handleActivate}
-                className="flex-1 rounded-xl bg-accent py-2.5 text-sm font-bold text-black hover:bg-accent-light transition-colors flex items-center justify-center gap-1.5"
+                disabled={verifying}
+                className="flex-1 rounded-xl bg-accent py-2.5 text-sm font-bold text-black hover:bg-accent-light transition-colors flex items-center justify-center gap-1.5 disabled:opacity-50"
               >
-                <Download className="h-3.5 w-3.5" />
-                Activate
+                {verifying ? "Verifying on BSC..." : <><Download className="h-3.5 w-3.5" /> Verify & Activate</>}
               </button>
             </div>
           </div>
