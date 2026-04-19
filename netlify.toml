@@ -3,7 +3,7 @@
   publish = ".next"
 
 [build.environment]
-  NEXT_PUBLIC_GEMINI_API_KEY = "YOUR_GEMINI_API_KEY"
+  GEMINI_API_KEY = "YOUR_GEMINI_API_KEY"
   NEXT_PUBLIC_BNB_WALLET = "0x6F56c0e475BD61904bfedE0d1cA5Ff69b16A4CCd"
 
 [[plugins]]
