@@ -87,30 +87,25 @@ export default function ToolsPage() {
     setResult("");
 
     try {
-      const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
-      if (!apiKey) throw new Error("AI service not configured");
-
       const userMessage = Object.entries(formData)
         .filter(([, value]) => value)
         .map(([key, value]) => `${key}: ${value}`)
         .join("\n");
 
-      const res = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            contents: [{ parts: [{ text: `${selectedTool.systemPrompt}\n\n---\n\nUser input:\n${userMessage}` }] }],
-            generationConfig: { maxOutputTokens: 2000, temperature: 0.7 },
-          }),
-        }
-      );
+      const res = await fetch("/api/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          prompt: `${selectedTool.systemPrompt}\n\n---\n\nUser input:\n${userMessage}`,
+          maxTokens: 2000,
+          temperature: 0.7,
+        }),
+      });
 
       if (!res.ok) throw new Error("AI generation failed. Please try again.");
 
       const data = await res.json();
-      const content = data?.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || "";
+      const content = data?.text?.trim() || "";
       if (!content) throw new Error("No content generated");
 
       setResult(content);
