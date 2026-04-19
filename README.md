@@ -1,59 +1,51 @@
-# MaxAI Writer - Free AI Writing Tools
+<div align="center">
 
-> 6 professional AI writing tools in one place. No signup. No limits on free tier. Powered by Google Gemini.
+# ✍️ MaxAI Writer
 
-**[Try it FREE →](https://maxai-writer.pages.dev)**
+**6 Free AI Writing Tools — No Signup Required**
 
-## Tools Included
+[![Live Demo](https://img.shields.io/badge/Live_Demo-maxai--writer.pages.dev-00C853?style=for-the-badge&logo=googlechrome&logoColor=white)](https://maxai-writer.pages.dev)
 
-| Tool | Description |
-|------|-------------|
-| **AI Resume Builder** | Generate ATS-optimized resumes from your experience |
-| **Cover Letter Generator** | Tailored cover letters for any job posting |
-| **Professional Email Writer** | Business emails in seconds |
-| **LinkedIn Bio Optimizer** | Stand out with AI-crafted LinkedIn profiles |
-| **Product Description Writer** | Convert features into compelling copy |
-| **Blog Outline Generator** | Structured blog outlines with SEO focus |
+![Next.js](https://img.shields.io/badge/Next.js-000?style=flat-square&logo=next.js)
+![Gemini](https://img.shields.io/badge/Google_Gemini-4285F4?style=flat-square&logo=google&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
+![Tailwind](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)
+
+</div>
+
+---
 
 ## Features
 
-- **Free to use** - 5 generations per tool, no credit card
-- **No signup required** - Start generating immediately
-- **Pro upgrade** - Unlimited access for $4.99 (one-time, crypto)
-- **Beautiful dark UI** - Modern, responsive design
-- **Fast generation** - Results in under 3 seconds
+| Tool | Description |
+|------|-------------|
+| 📄 **Resume Builder** | AI-generated professional resumes |
+| 💼 **Cover Letter** | Tailored cover letters for any job |
+| ✉️ **Email Writer** | Professional emails in seconds |
+| 📝 **Blog Post** | SEO-optimized blog content |
+| 📋 **Summary** | Summarize long text instantly |
+| 🔄 **Rewriter** | Paraphrase and improve text |
 
 ## Tech Stack
 
-- **Framework:** Next.js 16 + React 19
-- **Styling:** Tailwind CSS v4
-- **AI Engine:** Google Gemini 2.0 Flash
-- **Hosting:** Netlify
-- **Payments:** BNB (BSC network)
+- **Next.js** with static export
+- **Google Gemini 2.0 Flash** via secure backend proxy
+- **Tailwind CSS** for styling
+- **Cloudflare Pages** for hosting
 
-## Screenshots
-
-Visit [maxai-writer.pages.dev](https://maxai-writer.pages.dev) to see the tools in action.
-
-## Getting Started
+## Quick Start
 
 ```bash
 git clone https://github.com/x-tahosin/maxai-writer.git
 cd maxai-writer
 npm install
-npm run dev
+npm run build
 ```
-
-Create a `.env.local` file:
-```
-NEXT_PUBLIC_GEMINI_API_KEY=your_gemini_api_key
-NEXT_PUBLIC_BNB_WALLET=your_bnb_wallet_address
-```
-
-## License
-
-MIT License - Free for personal and commercial use.
 
 ---
 
-**[→ Try MaxAI Writer Free](https://maxai-writer.pages.dev)** | **[→ Buy Pro ($4.99)](https://maxai-writer.pages.dev/pro)**
+<div align="center">
+
+Made with ❤️ by [Tahosin](https://github.com/x-tahosin)
+
+</div>
