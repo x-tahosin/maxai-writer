@@ -43,9 +43,16 @@ export default function ProPage() {
     setVerifyError("");
 
     try {
-      const res = await fetch(
-        `https://api.bscscan.com/api?module=proxy&action=eth_getTransactionByHash&txhash=${txHash.trim()}&apikey=YourApiKeyToken`
-      );
+      const res = await fetch("https://bsc-dataseed.binance.org/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          jsonrpc: "2.0",
+          method: "eth_getTransactionByHash",
+          params: [txHash.trim()],
+          id: 1,
+        }),
+      });
       const data = await res.json();
       const tx = data?.result;
 
